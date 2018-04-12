@@ -862,6 +862,7 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
   [_quickViewController updateLayoutWithContentInsets:insets];
   [_configViewController updateLayoutWithContentInsets:insets];
   [_diffViewController updateLayoutWithContentInsets:insets];
+  [_conflictResolverViewController updateLayoutWithContentInsets:insets];
   [_commitRewriterViewController updateLayoutWithContentInsets:insets];
   [_commitSplitterViewController updateLayoutWithContentInsets:insets];
   
