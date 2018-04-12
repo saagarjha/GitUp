@@ -88,7 +88,7 @@ static inline WindowModeID _WindowModeIDFromString(NSString* mode) {
     return kWindowModeID_Stashes;
   }
   XLOG_DEBUG_UNREACHABLE();
-  return nil;
+  return 0;
 }
 
 @implementation Document {
@@ -182,6 +182,8 @@ static void _CheckTimerCallBack(CFRunLoopTimerRef timer, void* info) {
   [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidResignActiveNotification object:nil];
   [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidBecomeActiveNotification object:nil];
   [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:kUserDefaultsKey_DiffWhitespaceMode context:(__bridge void*)[Document class]];
+  
+  [_mainWindow removeObserver:self forKeyPath:@"contentLayoutRect"];
 
   CFRunLoopTimerInvalidate(_checkTimer);
   CFRelease(_checkTimer);
@@ -201,6 +203,8 @@ static void _CheckTimerCallBack(CFRunLoopTimerRef timer, void* info) {
     } else {
       XLOG_DEBUG_UNREACHABLE();
     }
+  } else if ([keyPath isEqualToString:@"contentLayoutRect"]) {
+    [self updateInsets];
   } else {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
   }
@@ -292,10 +296,15 @@ static void _CheckTimerCallBack(CFRunLoopTimerRef timer, void* info) {
   _rightView.wantsLayer = YES;
 
   // Text fields must be drawn on an opaque background to avoid subpixel antialiasing issues during animation.
-  for (NSTextField* field in @[ _infoTextField1, _infoTextField2, _progressTextField ]) {
-    field.drawsBackground = YES;
-    field.backgroundColor = _mainWindow.backgroundColor;
+  if (@available(macOS 10.10, *)) {
+  } else { // This is necessary because we cannot negate an @available check
+    for (NSTextField* field in @[ _infoTextField1, _infoTextField2, _progressTextField ]) {
+      field.drawsBackground = YES;
+      field.backgroundColor = _mainWindow.backgroundColor;
+    }
   }
+  
+  [_mainWindow addObserver:self forKeyPath:@"contentLayoutRect" options:0 context:nil];
 
   _mapViewController = [[GIMapViewController alloc] initWithRepository:_repository];
   _mapViewController.delegate = self;
@@ -838,6 +847,48 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
   }
 }
 
+- (void)updateInsets {
+  NSEdgeInsets insets = NSEdgeInsetsMake(0, 0, 0, 0);
+  CGRect frame = _helpView.frame;
+  frame.origin.y = _mainWindow.contentLayoutRect.size.height - frame.size.height;
+  _helpView.frame = frame;
+  if (_helpView.hidden) {
+    insets.top = _mainWindow.contentView.frame.size.height - _mainWindow.contentLayoutRect.size.height;
+  } else {
+    insets.top = _mainWindow.contentView.frame.size.height - _mainWindow.contentLayoutRect.size.height + _helpView.frame.size.height;
+  }
+  
+  [_commitViewController updateLayoutWithContentInsets:insets];
+  [_searchResultsViewController updateLayoutWithContentInsets:insets];
+  [_stashListViewController updateLayoutWithContentInsets:insets];
+  [_quickViewController updateLayoutWithContentInsets:insets];
+  [_configViewController updateLayoutWithContentInsets:insets];
+  [_diffViewController updateLayoutWithContentInsets:insets];
+  [_conflictResolverViewController updateLayoutWithContentInsets:insets];
+  [_commitRewriterViewController updateLayoutWithContentInsets:insets];
+  [_commitSplitterViewController updateLayoutWithContentInsets:insets];
+  
+  NSEdgeInsets mapInsets = insets;
+  mapInsets.bottom = _bottomView.frame.size.height;
+  [_mapViewController updateLayoutWithContentInsets:mapInsets];
+  
+  NSEdgeInsets tagsInsets = insets;
+  tagsInsets.bottom = _tagsBottomView.frame.size.height;
+  [_tagsViewController updateLayoutWithContentInsets:tagsInsets];
+  
+  NSEdgeInsets snapshotInsets = insets;
+  snapshotInsets.bottom = _snapshotsBottomView.frame.size.height;
+  [_snapshotListViewController updateLayoutWithContentInsets:snapshotInsets];
+  
+  NSEdgeInsets reflogInsets = insets;
+  reflogInsets.bottom = _reflogBottomView.frame.size.height;
+  [_unifiedReflogViewController updateLayoutWithContentInsets:reflogInsets];
+  
+  NSEdgeInsets ancestorsInsets = insets;
+  ancestorsInsets.bottom = _ancestorsBottomView.frame.size.height;
+  [_ancestorsViewController updateLayoutWithContentInsets:ancestorsInsets];
+}
+
 - (BOOL)setWindowModeID:(WindowModeID)modeID {
   if (!_mainWindow.attachedSheet && !_modeControl.hidden && _modeControl.enabled) {
     [self _setWindowMode:_WindowModeStringFromID(modeID)];
@@ -898,14 +949,8 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
   } else {
     XLOG_DEBUG_UNREACHABLE();
   }
-  if (showHelp) {
-    NSRect contentBounds = _contentView.bounds;
-    _helpView.hidden = NO;
-    _mainTabView.frame = NSMakeRect(contentBounds.origin.x, contentBounds.origin.y, contentBounds.size.width, contentBounds.size.height - _helpView.frame.size.height);
-  } else if (!_helpView.hidden) {
-    _mainTabView.frame = _contentView.bounds;
-    _helpView.hidden = YES;
-  }
+  _helpView.hidden = !showHelp;
+  [self updateInsets];
 }
 
 - (void)_hideHelp:(BOOL)open {
