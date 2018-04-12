@@ -182,6 +182,8 @@ static void _CheckTimerCallBack(CFRunLoopTimerRef timer, void* info) {
   [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidResignActiveNotification object:nil];
   [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidBecomeActiveNotification object:nil];
   [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:kUserDefaultsKey_DiffWhitespaceMode context:(__bridge void*)[Document class]];
+  
+  [_mainWindow removeObserver:self forKeyPath:@"contentLayoutRect"];
 
   CFRunLoopTimerInvalidate(_checkTimer);
   CFRelease(_checkTimer);
@@ -201,6 +203,8 @@ static void _CheckTimerCallBack(CFRunLoopTimerRef timer, void* info) {
     } else {
       XLOG_DEBUG_UNREACHABLE();
     }
+  } else if ([keyPath isEqualToString:@"contentLayoutRect"]) {
+    [self updateInsets];
   } else {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
   }
@@ -296,6 +300,8 @@ static void _CheckTimerCallBack(CFRunLoopTimerRef timer, void* info) {
     field.drawsBackground = YES;
     field.backgroundColor = _mainWindow.backgroundColor;
   }
+  
+  [_mainWindow addObserver:self forKeyPath:@"contentLayoutRect" options:0 context:nil];
 
   _mapViewController = [[GIMapViewController alloc] initWithRepository:_repository];
   _mapViewController.delegate = self;
@@ -838,6 +844,18 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
   }
 }
 
+- (void)updateInsets {
+  NSEdgeInsets insets = NSEdgeInsetsMake(0, 0, 0, 0);
+  CGRect frame = _helpView.frame;
+  frame.origin.y = _mainWindow.contentLayoutRect.size.height - frame.size.height;
+  _helpView.frame = frame;
+  if (_helpView.hidden) {
+    insets.top = _mainWindow.contentView.frame.size.height - _mainWindow.contentLayoutRect.size.height;
+  } else {
+    insets.top = _mainWindow.contentView.frame.size.height - _mainWindow.contentLayoutRect.size.height + _helpView.frame.size.height;
+  }
+}
+
 - (BOOL)setWindowModeID:(WindowModeID)modeID {
   if (!_mainWindow.attachedSheet && !_modeControl.hidden && _modeControl.enabled) {
     [self _setWindowMode:_WindowModeStringFromID(modeID)];
@@ -898,14 +916,8 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
   } else {
     XLOG_DEBUG_UNREACHABLE();
   }
-  if (showHelp) {
-    NSRect contentBounds = _contentView.bounds;
-    _helpView.hidden = NO;
-    _mainTabView.frame = NSMakeRect(contentBounds.origin.x, contentBounds.origin.y, contentBounds.size.width, contentBounds.size.height - _helpView.frame.size.height);
-  } else if (!_helpView.hidden) {
-    _mainTabView.frame = _contentView.bounds;
-    _helpView.hidden = YES;
-  }
+  _helpView.hidden = !showHelp;
+  [self updateInsets];
 }
 
 - (void)_hideHelp:(BOOL)open {
