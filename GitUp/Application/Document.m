@@ -857,7 +857,9 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
   } else {
     insets.top = _mainWindow.contentView.frame.size.height - _mainWindow.contentLayoutRect.size.height + _helpView.frame.size.height;
   }
+  
   [_commitViewController updateLayoutWithContentInsets:insets];
+  [_searchResultsViewController updateLayoutWithContentInsets:insets];
   [_stashListViewController updateLayoutWithContentInsets:insets];
   [_quickViewController updateLayoutWithContentInsets:insets];
   [_configViewController updateLayoutWithContentInsets:insets];
@@ -869,6 +871,22 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
   NSEdgeInsets mapInsets = insets;
   mapInsets.bottom = _bottomView.frame.size.height;
   [_mapViewController updateLayoutWithContentInsets:mapInsets];
+  
+  NSEdgeInsets tagsInsets = insets;
+  tagsInsets.bottom = _tagsBottomView.frame.size.height;
+  [_tagsViewController updateLayoutWithContentInsets:tagsInsets];
+  
+  NSEdgeInsets snapshotInsets = insets;
+  snapshotInsets.bottom = _snapshotsBottomView.frame.size.height;
+  [_snapshotListViewController updateLayoutWithContentInsets:snapshotInsets];
+  
+  NSEdgeInsets reflogInsets = insets;
+  reflogInsets.bottom = _reflogBottomView.frame.size.height;
+  [_unifiedReflogViewController updateLayoutWithContentInsets:reflogInsets];
+  
+  NSEdgeInsets ancestorsInsets = insets;
+  ancestorsInsets.bottom = _ancestorsBottomView.frame.size.height;
+  [_ancestorsViewController updateLayoutWithContentInsets:ancestorsInsets];
 }
 
 - (BOOL)setWindowModeID:(WindowModeID)modeID {

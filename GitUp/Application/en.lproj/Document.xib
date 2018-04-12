@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Document">
             <connections>
+                <outlet property="ancestorsBottomView" destination="NoT-pa-95Z" id="7wV-pf-kMP"/>
                 <outlet property="ancestorsControllerView" destination="4Od-pU-cwC" id="rKi-Xf-O9z"/>
                 <outlet property="ancestorsView" destination="Yj4-Sl-8P8" id="uNx-x0-4Kg"/>
                 <outlet property="bottomView" destination="zrg-bV-Y3w" id="C1k-6I-2Cz"/>
@@ -36,6 +37,7 @@
                 <outlet property="progressTextField" destination="zcT-hJ-9uO" id="nBW-YF-0d2"/>
                 <outlet property="pullButton" destination="ees-NA-cHZ" id="8lB-Sx-5n7"/>
                 <outlet property="pushButton" destination="D9C-8x-fkV" id="4NE-X5-diF"/>
+                <outlet property="reflogBottomView" destination="VSw-6L-sH5" id="Jbx-UQ-ebr"/>
                 <outlet property="reflogControllerView" destination="2JB-mH-NdY" id="3uE-5Z-JPg"/>
                 <outlet property="reflogView" destination="YxI-YX-ua5" id="w2Z-Ou-fp7"/>
                 <outlet property="resetView" destination="ifo-84-dTf" id="F3A-tv-xGv"/>
@@ -49,11 +51,13 @@
                 <outlet property="searchView" destination="hXJ-hB-b5A" id="6L9-1X-Isb"/>
                 <outlet property="settingsWindow" destination="F4T-LV-HgR" id="wPd-kE-nqf"/>
                 <outlet property="showMenu" destination="8Pw-bu-car" id="20S-jA-vdD"/>
+                <outlet property="snapshotsBottomView" destination="S6c-43-e4z" id="Bm8-jI-8bj"/>
                 <outlet property="snapshotsButton" destination="yWu-L8-6Ms" id="Ica-of-jKz"/>
                 <outlet property="snapshotsControllerView" destination="8Xd-B3-3KB" id="804-E4-bq6"/>
                 <outlet property="snapshotsView" destination="pJT-Vs-rsm" id="UB6-5y-QWa"/>
                 <outlet property="splitControllerView" destination="wgF-0m-Wo6" id="Ngg-aG-4sM"/>
                 <outlet property="splitView" destination="Nqd-ay-ONW" id="SfE-RZ-0DR"/>
+                <outlet property="tagsBottomView" destination="8is-Re-Wzr" id="SVB-ad-p4g"/>
                 <outlet property="tagsControllerView" destination="TAF-BH-RXj" id="wI7-ld-6W1"/>
                 <outlet property="tagsView" destination="eCQ-B2-xMC" id="63O-8R-I74"/>
                 <outlet property="titleTextField" destination="tYR-pC-pUm" id="P2n-zk-zN2"/>
@@ -204,8 +208,8 @@
             <rect key="frame" x="0.0" y="0.0" width="1000" height="500"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <customView id="399-bl-TuH">
-                    <rect key="frame" x="0.0" y="46" width="1000" height="454"/>
+                <customView misplaced="YES" id="399-bl-TuH">
+                    <rect key="frame" x="0.0" y="0.0" width="1000" height="500"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </customView>
                 <customView hidden="YES" id="4K3-nK-X1O">
@@ -371,21 +375,10 @@ Adjust settings in Show menu</string>
             <rect key="frame" x="0.0" y="0.0" width="261" height="500"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
             <subviews>
-                <customView id="TAF-BH-RXj">
-                    <rect key="frame" x="1" y="46" width="260" height="454"/>
+                <customView misplaced="YES" id="TAF-BH-RXj">
+                    <rect key="frame" x="1" y="0.0" width="260" height="500"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                 </customView>
-                <button verticalHuggingPriority="750" id="bvP-z4-n9x">
-                    <rect key="frame" x="91" y="10" width="80" height="27"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <buttonCell key="cell" type="bevel" title="Done" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QV1-K4-raG">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="titleBar" size="12"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toggleTags:" target="-2" id="eYy-3x-jbj"/>
-                    </connections>
-                </button>
                 <box horizontalHuggingPriority="750" boxType="separator" id="gbn-Tx-Mt6">
                     <rect key="frame" x="-2" y="0.0" width="5" height="500"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
@@ -394,6 +387,23 @@ Adjust settings in Show menu</string>
                     <rect key="frame" x="1" y="43" width="260" height="5"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </box>
+                <customView misplaced="YES" id="8is-Re-Wzr" customClass="GIPolyfillVisualEffectView">
+                    <rect key="frame" x="1" y="0.0" width="260" height="46"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button verticalHuggingPriority="750" misplaced="YES" id="49w-Nd-CxJ">
+                            <rect key="frame" x="90" y="9" width="80" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <buttonCell key="cell" type="bevel" title="Done" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="n0O-GX-Nzz">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="titleBar" size="12"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="toggleTags:" target="-2" id="b3B-5g-uLw"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </customView>
             </subviews>
             <point key="canvasLocation" x="-192.5" y="650"/>
         </customView>
@@ -401,21 +411,10 @@ Adjust settings in Show menu</string>
             <rect key="frame" x="0.0" y="0.0" width="261" height="500"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
             <subviews>
-                <customView id="4Od-pU-cwC">
-                    <rect key="frame" x="1" y="46" width="260" height="454"/>
+                <customView misplaced="YES" id="4Od-pU-cwC">
+                    <rect key="frame" x="1" y="0.0" width="260" height="500"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                 </customView>
-                <button verticalHuggingPriority="750" id="6Ni-2N-Ux7">
-                    <rect key="frame" x="91" y="10" width="80" height="27"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <buttonCell key="cell" type="bevel" title="Done" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="G4D-l9-GAh">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="titleBar" size="12"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toggleAncestors:" target="-2" id="cRN-q3-d3h"/>
-                    </connections>
-                </button>
                 <box horizontalHuggingPriority="750" boxType="separator" id="i5t-9R-reS">
                     <rect key="frame" x="-2" y="0.0" width="5" height="500"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
@@ -424,6 +423,23 @@ Adjust settings in Show menu</string>
                     <rect key="frame" x="1" y="43" width="260" height="5"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </box>
+                <customView misplaced="YES" id="NoT-pa-95Z" customClass="GIPolyfillVisualEffectView">
+                    <rect key="frame" x="0.0" y="0.0" width="261" height="46"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button verticalHuggingPriority="750" id="jkX-C0-W78">
+                            <rect key="frame" x="90" y="9" width="80" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <buttonCell key="cell" type="bevel" title="Done" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UTK-mA-4ks">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="titleBar" size="12"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="toggleAncestors:" target="-2" id="Z9C-V0-gL0"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </customView>
             </subviews>
             <point key="canvasLocation" x="124.5" y="650"/>
         </customView>
@@ -433,21 +449,10 @@ Adjust settings in Show menu</string>
             <rect key="frame" x="0.0" y="0.0" width="261" height="500"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
             <subviews>
-                <customView id="8Xd-B3-3KB">
-                    <rect key="frame" x="1" y="46" width="260" height="454"/>
+                <customView misplaced="YES" id="8Xd-B3-3KB">
+                    <rect key="frame" x="1" y="0.0" width="260" height="500"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                 </customView>
-                <button verticalHuggingPriority="750" id="rOD-bh-eJs">
-                    <rect key="frame" x="91" y="10" width="80" height="27"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <buttonCell key="cell" type="bevel" title="Done" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mu6-y9-mEl">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="cellTitle"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toggleSnapshots:" target="-2" id="xEj-EP-Pu2"/>
-                    </connections>
-                </button>
                 <box horizontalHuggingPriority="750" boxType="separator" id="BaD-c2-XFv">
                     <rect key="frame" x="-2" y="0.0" width="5" height="500"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
@@ -456,28 +461,34 @@ Adjust settings in Show menu</string>
                     <rect key="frame" x="1" y="43" width="260" height="5"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </box>
+                <customView misplaced="YES" id="S6c-43-e4z" customClass="GIPolyfillVisualEffectView">
+                    <rect key="frame" x="0.0" y="0.0" width="261" height="46"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button verticalHuggingPriority="750" id="X2c-3C-uck">
+                            <rect key="frame" x="90" y="9" width="80" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <buttonCell key="cell" type="bevel" title="Done" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="43q-aU-ngE">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="cellTitle"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="toggleSnapshots:" target="-2" id="vDf-G7-hKL"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </customView>
             </subviews>
-            <point key="canvasLocation" x="-526" y="650"/>
+            <point key="canvasLocation" x="-526.5" y="650"/>
         </customView>
         <customView id="YxI-YX-ua5" userLabel="Reflog View">
             <rect key="frame" x="0.0" y="0.0" width="261" height="500"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
             <subviews>
-                <customView id="2JB-mH-NdY">
-                    <rect key="frame" x="1" y="46" width="260" height="454"/>
+                <customView misplaced="YES" id="2JB-mH-NdY">
+                    <rect key="frame" x="1" y="0.0" width="260" height="500"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                 </customView>
-                <button verticalHuggingPriority="750" id="l3F-kQ-tsG">
-                    <rect key="frame" x="91" y="10" width="80" height="27"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <buttonCell key="cell" type="bevel" title="Done" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vb7-E2-czh">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="cellTitle"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toggleReflog:" target="-2" id="iy2-Rc-GIe"/>
-                    </connections>
-                </button>
                 <box horizontalHuggingPriority="750" boxType="separator" id="2s4-Rc-CUd">
                     <rect key="frame" x="-2" y="0.0" width="5" height="500"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
@@ -486,6 +497,23 @@ Adjust settings in Show menu</string>
                     <rect key="frame" x="1" y="43" width="260" height="5"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </box>
+                <customView misplaced="YES" id="VSw-6L-sH5">
+                    <rect key="frame" x="1" y="0.0" width="260" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <button verticalHuggingPriority="750" misplaced="YES" id="34x-Je-a4h">
+                            <rect key="frame" x="90" y="9" width="80" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <buttonCell key="cell" type="bevel" title="Done" bezelStyle="regularSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rFr-9g-T8j">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="cellTitle"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="toggleReflog:" target="-2" id="5vl-0W-cCa"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </customView>
             </subviews>
             <point key="canvasLocation" x="-399.5" y="730"/>
         </customView>
