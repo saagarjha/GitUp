@@ -854,6 +854,7 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
   } else {
     insets.top = _mainWindow.contentView.frame.size.height - _mainWindow.contentLayoutRect.size.height + _helpView.frame.size.height;
   }
+  [_commitViewController updateLayoutWithContentInsets:insets];
 }
 
 - (BOOL)setWindowModeID:(WindowModeID)modeID {
