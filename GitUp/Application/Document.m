@@ -296,9 +296,12 @@ static void _CheckTimerCallBack(CFRunLoopTimerRef timer, void* info) {
   _rightView.wantsLayer = YES;
 
   // Text fields must be drawn on an opaque background to avoid subpixel antialiasing issues during animation.
-  for (NSTextField* field in @[ _infoTextField1, _infoTextField2, _progressTextField ]) {
-    field.drawsBackground = YES;
-    field.backgroundColor = _mainWindow.backgroundColor;
+  if (@available(macOS 10.10, *)) {
+  } else { // This is necessary because we cannot negate an @available check
+    for (NSTextField* field in @[ _infoTextField1, _infoTextField2, _progressTextField ]) {
+      field.drawsBackground = YES;
+      field.backgroundColor = _mainWindow.backgroundColor;
+    }
   }
   
   [_mainWindow addObserver:self forKeyPath:@"contentLayoutRect" options:0 context:nil];
@@ -856,6 +859,9 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
   }
   [_commitViewController updateLayoutWithContentInsets:insets];
   [_stashListViewController updateLayoutWithContentInsets:insets];
+  NSEdgeInsets mapInsets = insets;
+  mapInsets.bottom = _bottomView.frame.size.height;
+  [_mapViewController updateLayoutWithContentInsets:mapInsets];
 }
 
 - (BOOL)setWindowModeID:(WindowModeID)modeID {
