@@ -859,6 +859,7 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
   }
   [_commitViewController updateLayoutWithContentInsets:insets];
   [_stashListViewController updateLayoutWithContentInsets:insets];
+  [_diffViewController updateLayoutWithContentInsets:insets];
   NSEdgeInsets mapInsets = insets;
   mapInsets.bottom = _bottomView.frame.size.height;
   [_mapViewController updateLayoutWithContentInsets:mapInsets];
