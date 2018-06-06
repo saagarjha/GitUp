@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -67,7 +67,7 @@
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
         </customObject>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="xOd-HO-29H" userLabel="Main Window" customClass="GIWindow">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="xOd-HO-29H" userLabel="Main Window" customClass="GIWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -541,7 +541,7 @@ Adjust settings in Show menu</string>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingMiddle" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="&lt;REPOSITORY&gt;" usesSingleLineMode="YES" id="IrL-wK-jB6">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" white="0.0" alpha="0.66000000000000003" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -550,7 +550,7 @@ Adjust settings in Show menu</string>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="&lt;INFO&gt;" usesSingleLineMode="YES" id="ueS-Kv-b9C">
                         <font key="font" metaFont="miniSystem"/>
-                        <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -668,7 +668,7 @@ Adjust settings in Show menu</string>
             </subviews>
             <point key="canvasLocation" x="960" y="1327.5"/>
         </customView>
-        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="F4T-LV-HgR" userLabel="Settings Window">
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F4T-LV-HgR" userLabel="Settings Window">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="131" y="158" width="450" height="173"/>

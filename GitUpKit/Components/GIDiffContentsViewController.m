@@ -104,7 +104,7 @@ NSString* const GIDiffContentsViewControllerUserDefaultKey_DiffViewMode = @"GIDi
 
 // Override all native drawing
 - (void)drawRect:(NSRect)dirtyRect {
-  [[NSColor whiteColor] setFill];
+  [[NSColor textBackgroundColor] setFill];
   NSRectFill(dirtyRect);
 }
 
@@ -248,7 +248,7 @@ static NSColor* _DimColor(NSColor* color) {
   [super loadView];
 
   _tableView.controller = self;
-  _tableView.backgroundColor = [NSColor colorWithDeviceRed:0.98 green:0.98 blue:0.98 alpha:1.0];
+  _tableView.backgroundColor = [NSColor textBackgroundColor];
 
   _emptyTextField.stringValue = @"";
 

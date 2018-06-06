@@ -60,7 +60,7 @@
 
   CGContextClearRect(context, dirtyRect);
 
-  CGContextSetRGBFillColor(context, 0.9, 0.9, 0.9, 1.0);
+  CGContextSetFillColorWithColor(context, NSColor.windowBackgroundColor.CGColor);
   GICGContextAddRoundedRect(context, bounds, kWelcomeWindowCornerRadius);
   CGContextFillPath(context);
 }

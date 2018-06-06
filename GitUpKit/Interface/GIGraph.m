@@ -530,7 +530,16 @@ cleanup:
 
 - (void)_computeNodeAndLineColors {
   NSMutableArray* colors = [[NSMutableArray alloc] init];
-#if 1  // Pol set
+#if 1
+  [colors addObject:[NSColor.systemRedColor colorWithAlphaComponent:0.75]];
+  [colors addObject:[NSColor.systemOrangeColor colorWithAlphaComponent:0.75]];
+  [colors addObject:[NSColor.systemYellowColor colorWithAlphaComponent:0.75]];
+  [colors addObject:[NSColor.systemGreenColor colorWithAlphaComponent:0.75]];
+  [colors addObject:[NSColor.systemBlueColor colorWithAlphaComponent:0.75]];
+  [colors addObject:[NSColor.systemPurpleColor colorWithAlphaComponent:0.75]];
+  [colors addObject:[NSColor.systemPinkColor colorWithAlphaComponent:0.75]];
+  [colors addObject:[NSColor.systemBrownColor colorWithAlphaComponent:0.75]];
+#elif  // Pol set
   [colors addObject:[NSColor colorWithDeviceHue:(0.0 / 8.0) saturation:0.45 brightness:0.90 alpha:1.0]];
   [colors addObject:[NSColor colorWithDeviceHue:(1.0 / 8.0) saturation:0.45 brightness:0.90 alpha:1.0]];
   [colors addObject:[NSColor colorWithDeviceHue:(2.0 / 8.0) saturation:0.45 brightness:0.90 alpha:1.0]];

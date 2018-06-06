@@ -279,13 +279,13 @@ static void _CheckTimerCallBack(CFRunLoopTimerRef timer, void* info) {
   CGFloat fontSize = _infoTextField2.font.pointSize;
   NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
   style.alignment = NSCenterTextAlignment;
-  _stateAttributes = @{NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [NSColor redColor], NSFontAttributeName : [NSFont boldSystemFontOfSize:fontSize]};
+  _stateAttributes = @{NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [NSColor systemRedColor], NSFontAttributeName : [NSFont boldSystemFontOfSize:fontSize]};
 
   NSString* frameString = [_repository userInfoForKey:kRepositoryUserInfoKey_MainWindowFrame];
   if (frameString) {
     [_mainWindow setFrameFromString:frameString];
   }
-  _mainWindow.backgroundColor = [NSColor whiteColor];
+  _mainWindow.backgroundColor = [NSColor textBackgroundColor];
   [_mainWindow setToolbar:_toolbar];
   if (_unifiedToolbar) {
     [_mainWindow setTitleVisibility:NSWindowTitleHidden];

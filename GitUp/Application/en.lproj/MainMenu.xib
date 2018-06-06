@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,7 +13,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="GitUp Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="preferences" animationBehavior="default" id="3qV-q4-a6k">
+        <window title="GitUp Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="preferences" animationBehavior="default" id="3qV-q4-a6k">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="940" y="240" width="500" height="400"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
@@ -853,7 +852,7 @@ You must close and reopen any opened repositories in GitUp after changing this s
                 </menuItem>
             </items>
         </menu>
-        <window title="Clone Repository" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="6SP-eN-0Kv">
+        <window title="Clone Repository" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6SP-eN-0Kv">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="131" y="158" width="502" height="167"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
@@ -866,7 +865,7 @@ You must close and reopen any opened repositories in GitUp after changing this s
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Required" drawsBackground="YES" id="QXH-ou-KWa">
                             <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
@@ -928,7 +927,7 @@ Gw
             </view>
             <point key="canvasLocation" x="-716" y="966.5"/>
         </window>
-        <window title="Authentication Required" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="mcM-YD-UN9">
+        <window title="Authentication Required" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="mcM-YD-UN9">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="131" y="158" width="428" height="217"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
@@ -970,7 +969,7 @@ Gw
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="y3C-g4-ftz">
                             <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
@@ -988,7 +987,7 @@ Gw
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="LyY-DF-jhs">
                             <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             <allowedInputSourceLocales>
                                 <string>NSAllRomanInputSourcesLocaleIdentifier</string>
@@ -1037,7 +1036,7 @@ Gw
             </view>
             <point key="canvasLocation" x="-709" y="619.5"/>
         </window>
-        <window title="About GitUp" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="about" animationBehavior="default" id="sHg-NM-pfN" userLabel="About" customClass="NSPanel">
+        <window title="About GitUp" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="about" animationBehavior="default" id="sHg-NM-pfN" userLabel="About" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="612" y="242" width="276" height="363"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
@@ -1101,7 +1100,7 @@ UI design by Wayne Fan</string>
             </view>
             <point key="canvasLocation" x="114" y="441.5"/>
         </window>
-        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="mjY-As-hbN" userLabel="Welcome" customClass="WelcomeWindow">
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="mjY-As-hbN" userLabel="Welcome" customClass="WelcomeWindow">
             <rect key="contentRect" x="131" y="158" width="280" height="349"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="36m-6r-JT2" customClass="WelcomeView">
@@ -1148,13 +1147,13 @@ UI design by Wayne Fan</string>
                                     <rect key="frame" x="50" y="7" width="180" height="20"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="linkColor">
-                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="alternateLinkColor">
                                             <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="string" keyPath="link" value="Open a Git Repository…"/>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="linkColor">
+                                            <color key="value" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="openDocument:" target="-1" id="PnG-74-JXS"/>
@@ -1162,7 +1161,6 @@ UI design by Wayne Fan</string>
                                 </customView>
                             </subviews>
                         </view>
-                        <color key="fillColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </box>
                     <box verticalHuggingPriority="750" boxType="separator" id="FXE-km-lcD">
                         <rect key="frame" x="0.0" y="85" width="280" height="5"/>
@@ -1191,7 +1189,6 @@ UI design by Wayne Fan</string>
                                 </popUpButton>
                             </subviews>
                         </view>
-                        <color key="fillColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </box>
                     <box verticalHuggingPriority="750" boxType="separator" id="3Ya-QW-NlZ">
                         <rect key="frame" x="0.0" y="49" width="280" height="5"/>
@@ -1201,13 +1198,14 @@ UI design by Wayne Fan</string>
                         <rect key="frame" x="45" y="20" width="12" height="12"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon_twitter" id="4p0-VD-kVJ"/>
+                        <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                     </imageView>
                     <customView id="5ht-7L-7AO" customClass="GILinkButton">
                         <rect key="frame" x="60" y="13" width="75" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="linkColor">
-                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="value" name="labelColor" catalog="System" colorSpace="catalog"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="alternateLinkColor">
                                 <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
@@ -1222,13 +1220,14 @@ UI design by Wayne Fan</string>
                         <rect key="frame" x="154" y="20" width="12" height="12"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon_forum" id="3Om-2j-ETN"/>
+                        <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                     </imageView>
                     <customView id="ozw-os-Nc4" customClass="GILinkButton">
                         <rect key="frame" x="169" y="13" width="75" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="linkColor">
-                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="value" name="labelColor" catalog="System" colorSpace="catalog"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="alternateLinkColor">
                                 <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>

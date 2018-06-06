@@ -97,7 +97,7 @@ static const void* _associatedObjectDataKey = &_associatedObjectDataKey;
   _dateFormatter = [[NSDateFormatter alloc] init];
   _dateFormatter.dateStyle = NSDateFormatterShortStyle;
   _dateFormatter.timeStyle = NSDateFormatterShortStyle;
-  _backgroundColor = [[NSColor whiteColor] retain];
+  _backgroundColor = [[NSColor textBackgroundColor] retain];
 
   self.graph = nil;
 }
@@ -878,7 +878,7 @@ static void _DrawBranchTitle(CGContextRef context, CGFloat x, CGFloat y, CGPoint
   if (boldFont == NULL) {
     boldFont = CTFontCreateUIFontForLanguage(kCTFontUIFontEmphasizedSystem, 13.0, CFSTR("en-US"));
   }
-  NSColor* darkColor = [NSColor colorWithDeviceWhite:0.2 alpha:1.0];
+  NSColor* darkColor = NSColor.secondaryLabelColor;
 
   // Start new attributed string for the branch title
   NSMutableAttributedString* multilineTitle = [[NSMutableAttributedString alloc] initWithString:@""];
@@ -1331,7 +1331,7 @@ static void _DrawSelectedNode(CGContextRef context, CGFloat x, CGFloat y, GINode
   CGContextAddPath(context, labelPath);
   CGContextFillPath(context);
 
-  CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
+  CGContextSetStrokeColorWithColor(context, NSColor.controlBackgroundColor.CGColor);
   CGContextSetLineWidth(context, 2);
   CGContextAddPath(context, labelPath);
   CGContextStrokePath(context);
@@ -1494,7 +1494,6 @@ static void _DrawSelectedNode(CGContextRef context, CGFloat x, CGFloat y, GINode
   // Draw lines
   if (lines.count) {
     CGContextSetLineJoin(context, kCGLineJoinMiter);
-    CGContextSetBlendMode(context, kCGBlendModeMultiply);
     for (NSInteger i = 0, count = lines.count; i < count; ++i) {
       GILine* line = lines[i];
       BOOL onBranchMainLine = line.branchMainLine;
@@ -1643,7 +1642,7 @@ static void _DrawSelectedNode(CGContextRef context, CGFloat x, CGFloat y, GINode
         CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 0.666);
         CGContextFillRect(context, HEAD_BOUNDS(x, y));
 #endif
-        _DrawHead(context, x, y, !_graph.history.HEADBranch, headNode.primaryLine.color.CGColor, tagAttributes);
+        _DrawHead(context, x, y, !_graph.history.HEADBranch, [headNode.primaryLine.color colorWithAlphaComponent:1].CGColor, tagAttributes);
       }
     }
   }

@@ -116,7 +116,7 @@ static NSMutableDictionary* _patternHelp = nil;
   CGFloat fontSize = _cachedCellView.optionTextField.font.pointSize;
   _optionAttributes = @{NSFontAttributeName : [NSFont boldSystemFontOfSize:fontSize]};
   _separatorAttributes = @{NSFontAttributeName : [NSFont systemFontOfSize:fontSize]};
-  _valueAttributes = @{NSFontAttributeName : [NSFont systemFontOfSize:fontSize], NSBackgroundColorAttributeName : [NSColor colorWithDeviceRed:1.0 green:1.0 blue:0.0 alpha:0.5]};
+  _valueAttributes = @{NSFontAttributeName : [NSFont systemFontOfSize:fontSize], NSBackgroundColorAttributeName : [NSColor.systemYellowColor colorWithAlphaComponent:0.5]};
 }
 
 - (void)viewWillShow {
@@ -208,12 +208,13 @@ static NSMutableDictionary* _patternHelp = nil;
 
 - (void)tableView:(NSTableView*)tableView didAddRowView:(NSTableRowView*)rowView forRow:(NSInteger)row {
   GCConfigOption* option = _config[row];
+  NSBundle *bundle = [NSBundle bundleForClass:self.class];
   if ([_set countForObject:option.variable] > 1) {
-    rowView.backgroundColor = [NSColor colorWithDeviceRed:1.0 green:0.95 blue:0.95 alpha:1.0];
+    rowView.backgroundColor = [NSColor colorNamed:@"GIConfigViewConflictColor" bundle:bundle];
   } else if (option.level != kGCConfigLevel_Local) {
-    rowView.backgroundColor = [NSColor colorWithDeviceRed:0.95 green:1.0 blue:0.95 alpha:1.0];
+    rowView.backgroundColor = [NSColor colorNamed:@"GIConfigViewGlobalColor" bundle:bundle];
   } else {
-    rowView.backgroundColor = [NSColor whiteColor];
+    rowView.backgroundColor = [NSColor textBackgroundColor];
   }
 }
 

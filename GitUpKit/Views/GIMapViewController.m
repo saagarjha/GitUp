@@ -91,7 +91,7 @@ static NSColor* _patternColor = nil;
   if (previewMode) {
     _graphView.backgroundColor = _patternColor;
   } else {
-    _graphView.backgroundColor = [NSColor whiteColor];
+    _graphView.backgroundColor = [NSColor textBackgroundColor];
   }
   _graphScrollView.backgroundColor = _graphView.backgroundColor;  // Required for exposed areas through elasticity
 }

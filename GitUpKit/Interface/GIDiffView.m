@@ -64,16 +64,17 @@ const char* GIDiffViewMissingNewlinePlaceholder = "🚫\n";
   GIDiffViewLineHeight = ceilf(ascent + descent + leading) + kTextLineHeightPadding;
   GIDiffViewLineDescent = ceilf(descent) + kTextLineDescentAdjustment;
 
-  GIDiffViewDeletedBackgroundColor = [NSColor colorWithDeviceRed:1.0 green:0.9 blue:0.9 alpha:1.0];
-  GIDiffViewDeletedHighlightColor = [NSColor colorWithDeviceRed:1.0 green:0.7 blue:0.7 alpha:1.0];
-  GIDiffViewAddedBackgroundColor = [NSColor colorWithDeviceRed:0.85 green:1.0 blue:0.85 alpha:1.0];
-  GIDiffViewAddedHighlightColor = [NSColor colorWithDeviceRed:0.7 green:1.0 blue:0.7 alpha:1.0];
-  GIDiffViewSeparatorBackgroundColor = [NSColor colorWithDeviceRed:0.97 green:0.97 blue:0.97 alpha:1.0];
-  GIDiffViewSeparatorLineColor = [NSColor colorWithDeviceRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+  NSBundle *bundle = [NSBundle bundleForClass:self.class];
+  GIDiffViewDeletedBackgroundColor = [NSColor colorNamed:@"GIDiffViewDeletedBackgroundColor" bundle:bundle];
+  GIDiffViewDeletedHighlightColor = [NSColor colorNamed:@"GIDiffViewDeletedHighlightColor" bundle:bundle];
+  GIDiffViewAddedBackgroundColor = [NSColor colorNamed:@"GIDiffViewAddedBackgroundColor" bundle:bundle];
+  GIDiffViewAddedHighlightColor = [NSColor colorNamed:@"GIDiffViewAddedHighlightColor" bundle:bundle];
+  GIDiffViewSeparatorBackgroundColor = [NSColor colorNamed:@"GIDiffViewSeparatorBackgroundColor" bundle:bundle];
+  GIDiffViewSeparatorLineColor = [NSColor separatorColor];
   GIDiffViewSeparatorTextColor = [NSColor colorWithDeviceRed:0.65 green:0.65 blue:0.65 alpha:1.0];
   GIDiffViewVerticalLineColor = [NSColor colorWithDeviceRed:0.85 green:0.85 blue:0.85 alpha:0.6];
   GIDiffViewLineNumberColor = [NSColor colorWithDeviceRed:0.75 green:0.75 blue:0.75 alpha:1.0];
-  GIDiffViewPlainTextColor = [NSColor blackColor];
+  GIDiffViewPlainTextColor = [NSColor textColor];
 }
 
 - (void)_windowKeyDidChange:(NSNotification*)notification {
@@ -95,7 +96,7 @@ const char* GIDiffViewMissingNewlinePlaceholder = "🚫\n";
 }
 
 - (void)didFinishInitializing {
-  _backgroundColor = [NSColor whiteColor];
+  _backgroundColor = [NSColor textBackgroundColor];
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect {

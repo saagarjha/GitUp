@@ -162,6 +162,8 @@ static NSColor* _separatorColor = nil;
   [super awakeFromNib];
 
   self.font = [NSFont userFixedPitchFontOfSize:11];
+  self.textColor = NSColor.textColor;
+  self.backgroundColor = NSColor.textBackgroundColor;
   self.continuousSpellCheckingEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:GICommitMessageViewUserDefaultKey_EnableSpellChecking];
   self.automaticSpellingCorrectionEnabled = NO;  // Don't trust IB
   self.grammarCheckingEnabled = NO;  // Don't trust IB
@@ -180,7 +182,7 @@ static NSColor* _separatorColor = nil;
 
 - (void)drawRect:(NSRect)dirtyRect {
   [super drawRect:dirtyRect];
-
+  
   if ([[NSUserDefaults standardUserDefaults] boolForKey:GICommitMessageViewUserDefaultKey_ShowMargins]) {
     NSRect bounds = self.bounds;
     CGFloat offset = self.textContainerOrigin.x + self.textContainerInset.width + self.textContainer.lineFragmentPadding;
@@ -238,7 +240,7 @@ static NSColor* _separatorColor = nil;
 @implementation GITableCellView
 
 + (void)initialize {
-  _separatorColor = [NSColor colorWithDeviceRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+  _separatorColor = [NSColor separatorColor];
 }
 
 - (void)saveTextFieldColors {
@@ -260,8 +262,8 @@ static NSColor* _separatorColor = nil;
 
   for (NSView* view in self.subviews) {
     if ([view isKindOfClass:[NSTextField class]]) {
-      if (backgroundStyle == NSBackgroundStyleDark) {
-        [(NSTextField*)view setTextColor:[NSColor whiteColor]];
+      if (backgroundStyle == NSBackgroundStyleEmphasized) {
+        [(NSTextField*)view setTextColor:[NSColor textBackgroundColor]];
       } else {
         [(NSTextField*)view setTextColor:objc_getAssociatedObject(view, _associatedObjectCommitKey)];
       }
