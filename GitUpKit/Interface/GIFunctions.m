@@ -46,7 +46,6 @@ void GIComputeHighlightRanges(const char* deletedBytes, NSUInteger deletedCount,
       } else if (TEST_BITS(byte, 0b11111100)) {
         remaining = 6;
       } else {
-        XLOG_DEBUG_CHECK(!(byte & (1 << 7)));
         remaining = 1;
       }
     }
