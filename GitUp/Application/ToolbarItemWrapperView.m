@@ -19,25 +19,14 @@
 
 - (NSView*)hitTest:(NSPoint)point {
   // Normally, a double-click in a window title bar zooms the window on the second mouse-up. In a unified title/toolbar window, if a mouse-up hit-tests into a subview of a toolbar item, the mouse-up cannot zoom the window. This subclass selectively suppresses hits to allow a double-click to zoom its window.
-  id hit = [super hitTest:point];
+  NSView *hit = [super hitTest:point];
 
-  if ([hit isKindOfClass:[NSTextField class]]) {
-    NSTextField* field = hit;
-    return field.selectable ? field : nil;
+  if ([hit isKindOfClass:self.class] ||
+      ([hit isKindOfClass:NSTextField.class] && !((NSTextField *)hit).selectable)) {
+    return nil;
+  } else {
+    return hit;
   }
-
-  if ([hit isKindOfClass:[NSControl class]]) {
-    NSControl* control = hit;
-    return control.isEnabled ? control : nil;
-  }
-
-  if ([hit isKindOfClass:[NSTextView class]]) {
-    // The search field adds the field editor, an NSTextView, as a subview when it's being edited.
-    NSTextView* textView = hit;
-    return textView.selectable ? textView : nil;
-  }
-
-  return nil;
 }
 
 @end
