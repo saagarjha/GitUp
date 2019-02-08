@@ -161,7 +161,7 @@ static NSColor* _separatorColor = nil;
 - (void)awakeFromNib {
   [super awakeFromNib];
 
-  self.font = [NSFont userFixedPitchFontOfSize:11];
+  self.font = [NSFont fontWithName:@"SF Mono" size:11];
   self.textColor = NSColor.textColor;
   self.backgroundColor = NSColor.textBackgroundColor;
   self.continuousSpellCheckingEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:GICommitMessageViewUserDefaultKey_EnableSpellChecking];
@@ -186,7 +186,7 @@ static NSColor* _separatorColor = nil;
   if ([[NSUserDefaults standardUserDefaults] boolForKey:GICommitMessageViewUserDefaultKey_ShowMargins]) {
     NSRect bounds = self.bounds;
     CGFloat offset = self.textContainerOrigin.x + self.textContainerInset.width + self.textContainer.lineFragmentPadding;
-    CGFloat charWidth = self.font.maximumAdvancement.width;  // TODO: Is this the most reliable way to get the character width of a fixed-width font?
+    CGFloat charWidth = [self.font advancementForGlyph:0].width;  // TODO: Is this the most reliable way to get the character width of a fixed-width font?
     CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
 
     CGContextSaveGState(context);
@@ -320,14 +320,14 @@ static NSColor* _separatorColor = nil;
       switch ([string characterAtIndex:characterIndex]) {
         case ' ': {
           NSFont* font = [storage attribute:NSFontAttributeName atIndex:characterIndex effectiveRange:NULL];
-          XLOG_DEBUG_CHECK([font.fontName isEqualToString:@"Menlo-Regular"]);
+          XLOG_DEBUG_CHECK([font.fontName isEqualToString:@"SF Mono-Regular"]);
           [self replaceGlyphAtIndex:glyphIndex withGlyph:[font glyphWithName:@"periodcentered"]];
           break;
         }
 
         case '\n': {
           NSFont* font = [storage attribute:NSFontAttributeName atIndex:characterIndex effectiveRange:NULL];
-          XLOG_DEBUG_CHECK([font.fontName isEqualToString:@"Menlo-Regular"]);
+          XLOG_DEBUG_CHECK([font.fontName isEqualToString:@"SF Mono-Regular"]);
           [self replaceGlyphAtIndex:glyphIndex withGlyph:[font glyphWithName:@"carriagereturn"]];
           break;
         }

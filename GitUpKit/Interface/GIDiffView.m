@@ -47,7 +47,7 @@ const char* GIDiffViewMissingNewlinePlaceholder = "🚫\n";
 @implementation GIDiffView
 
 + (void)initialize {
-  GIDiffViewAttributes = CFBridgingRetain(@{(id)kCTFontAttributeName : [NSFont userFixedPitchFontOfSize:kTextFontSize], (id)kCTForegroundColorFromContextAttributeName : (id)kCFBooleanTrue});
+  GIDiffViewAttributes = CFBridgingRetain(@{(id)kCTFontAttributeName : [NSFont fontWithName:@"SF Mono" size:kTextFontSize], (id)kCTForegroundColorFromContextAttributeName : (id)kCFBooleanTrue});
 
   CFAttributedStringRef addedString = CFAttributedStringCreate(kCFAllocatorDefault, CFSTR("+"), GIDiffViewAttributes);
   GIDiffViewAddedLine = CTLineCreateWithAttributedString(addedString);
