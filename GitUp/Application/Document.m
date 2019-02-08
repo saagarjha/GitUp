@@ -453,7 +453,7 @@ static void _CheckTimerCallBack(CFRunLoopTimerRef timer, void* info) {
         return [repository cloneUsingRemote:remote recursive:recursive error:outError];
       }
       completionBlock:^(BOOL success, NSError* error) {
-        [_repository resumeHistoryUpdates];
+        [self->_repository resumeHistoryUpdates];
         if (!success) {
           [self presentError:error];
         }
@@ -502,20 +502,20 @@ static void _CheckTimerCallBack(CFRunLoopTimerRef timer, void* info) {
             }
           }
         }
-        return !_abortIndexing;
+        return !self->_abortIndexing;
       }
       completion:^(BOOL success, NSError* error) {
-        if (!_abortIndexing) {  // If indexing has been aborted, this means the document has already been closed, so don't attempt to do *anything*
+        if (!self->_abortIndexing) {  // If indexing has been aborted, this means the document has already been closed, so don't attempt to do *anything*
           if (success) {
-            _searchReady = YES;
+            self->_searchReady = YES;
             [self _setSearchFieldPlaceholder:NSLocalizedString(@"Search Repository…", nil)];
-            _searchField.enabled = YES;
+            self->_searchField.enabled = YES;
           } else {
             [self _setSearchFieldPlaceholder:NSLocalizedString(@"Search Unavailable", nil)];
             [self presentError:error];
           }
           [[NSProcessInfo processInfo] enableSuddenTermination];
-          _indexing = NO;
+          self->_indexing = NO;
         }
       }];
 }
@@ -554,7 +554,7 @@ static void _CheckTimerCallBack(CFRunLoopTimerRef timer, void* info) {
         [alert beginSheetModalForWindow:_mainWindow
                   withCompletionHandler:^(NSInteger returnCode) {
                     if (alert.suppressionButton.state) {
-                      [_repository setUserInfo:@(YES) forKey:kRepositoryUserInfoKey_SkipSubmoduleCheck];
+                      [self->_repository setUserInfo:@(YES) forKey:kRepositoryUserInfoKey_SkipSubmoduleCheck];
                     }
                     if (returnCode == NSAlertDefaultReturn) {
                       [self _initializeSubmodules];
@@ -967,7 +967,7 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
 
 - (void)_loadMoreAncestors {
   if (![_quickViewAncestors iterateWithCommitBlock:^(GCHistoryCommit* commit, BOOL* stop) {
-        [_quickViewCommits addObject:commit];
+        [self->_quickViewCommits addObject:commit];
       }]) {
     _quickViewAncestors = nil;
   }
@@ -975,8 +975,8 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
 
 - (void)_loadMoreDescendants {
   if (![_quickViewDescendants iterateWithCommitBlock:^(GCHistoryCommit* commit, BOOL* stop) {
-        [_quickViewCommits insertObject:commit atIndex:0];
-        _quickViewIndex += 1;  // We insert commits before the index too!
+        [self->_quickViewCommits insertObject:commit atIndex:0];
+        self->_quickViewIndex += 1;  // We insert commits before the index too!
       }]) {
     _quickViewDescendants = nil;
   }
@@ -1704,10 +1704,10 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
             withCompletionHandler:^(NSInteger returnCode) {
               if (returnCode == NSAlertFirstButtonReturn) {
                 NSError* error;
-                if (![_repository resetToHEAD:kGCResetMode_Hard error:&error] || (_untrackedButton.state && ![_repository cleanWorkingDirectory:&error]) || ![_repository updateAllSubmodulesResursively:YES error:&error]) {
+                if (![self->_repository resetToHEAD:kGCResetMode_Hard error:&error] || (self->_untrackedButton.state && ![self->_repository cleanWorkingDirectory:&error]) || ![self->_repository updateAllSubmodulesResursively:YES error:&error]) {
                   [self presentError:error];
                 }
-                [_repository notifyRepositoryChanged];
+                [self->_repository notifyRepositoryChanged];
               }
             }];
 }
@@ -1787,7 +1787,7 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
   if (_tagsView.superview) {
     [self _removeSideView:_tagsView
                completion:^{
-                 _tagsViewController.results = nil;
+                 self->_tagsViewController.results = nil;
                }];
     _hiddenWarningView.hidden = YES;  // Hide immediately
     [_mainWindow makeFirstResponder:_mapViewController.preferredFirstResponder];
@@ -1846,7 +1846,7 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
   if (_ancestorsView.superview) {
     [self _removeSideView:_ancestorsView
                completion:^{
-                 _ancestorsViewController.results = nil;
+                 self->_ancestorsViewController.results = nil;
                }];
     _hiddenWarningView.hidden = YES;  // Hide immediately
     [_mainWindow makeFirstResponder:_mapViewController.preferredFirstResponder];
@@ -1891,7 +1891,7 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
       _hiddenWarningView.hidden = YES;  // Hide immediately
       [self _removeSideView:_searchView
                  completion:^{
-                   _searchResultsViewController.results = nil;
+                   self->_searchResultsViewController.results = nil;
                  }];
     }
 
@@ -1955,19 +1955,19 @@ static NSString* _StringFromRepositoryState(GCRepositoryState state) {
         }
       }
       dispatch_async(dispatch_get_main_queue(), ^{
-        if (_repository) {
-          _updatedReferences = updatedReferences;
-          if (_updatedReferences.count) {
-            [_windowController showOverlayWithStyle:kGIOverlayStyle_Informational message:NSLocalizedString(@"New commits are available from the repository remotes - Use Fetch to retrieve them", nil)];
-            XLOG_VERBOSE(@"Repository is out-of-sync with its remotes: %@", _updatedReferences.allKeys);
+        if (self->_repository) {
+          self->_updatedReferences = updatedReferences;
+          if (self->_updatedReferences.count) {
+            [self->_windowController showOverlayWithStyle:kGIOverlayStyle_Informational message:NSLocalizedString(@"New commits are available from the repository remotes - Use Fetch to retrieve them", nil)];
+            XLOG_VERBOSE(@"Repository is out-of-sync with its remotes: %@", self->_updatedReferences.allKeys);
           } else {
             if (sender) {
-              [_windowController showOverlayWithStyle:kGIOverlayStyle_Informational message:NSLocalizedString(@"Repository is up-to-date", nil)];
+              [self->_windowController showOverlayWithStyle:kGIOverlayStyle_Informational message:NSLocalizedString(@"Repository is up-to-date", nil)];
             }
             XLOG_VERBOSE(@"Repository is up-to-date with its remotes");
           }
 
-          _checkingForChanges = NO;
+          self->_checkingForChanges = NO;
           [self _resetCheckTimer];
           [self _updateStatusBar];
         } else {
